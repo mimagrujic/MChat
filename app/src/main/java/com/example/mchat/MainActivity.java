@@ -1,6 +1,8 @@
 package com.example.mchat;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.SearchView;
 
@@ -27,9 +29,12 @@ public class MainActivity extends AppCompatActivity {
         view.setIconified(false);
         view.setQueryHint("Search here...");
 
+        Contact.initializeContacts();
     }
 
     public void newConvo(View view){
-
+        Intent i = new Intent(this, ContactActivity.class);
+        startActivity(i);
     }
+
 }

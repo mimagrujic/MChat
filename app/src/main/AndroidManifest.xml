@@ -18,10 +18,17 @@
             android:label="MChat">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
+        <activity
+            android:name=".ContactActivity"
+            android:parentActivityName=".MainActivity">
+        </activity>
+        <activity
+            android:name=".ConversationActivity"
+            android:parentActivityName=".ContactActivity">
+        </activity>
+        </application>
 
 </manifest>

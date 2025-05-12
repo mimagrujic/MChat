@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/allContacts"
+        android:layout_width="369dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:text="Contacts"
+        android:textColor="#E6155C"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.235"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="379dp"
+        android:layout_height="618dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.468"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/allContacts"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/con1"
+        android:layout_width="380dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:onClick="openChat"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/recyclerView"
+        app:layout_constraintTop_toTopOf="@+id/recyclerView" />
+
+    <TextView
+        android:id="@+id/con2"
+        android:layout_width="380dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:onClick="openChat"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/recyclerView"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/recyclerView"
+        app:layout_constraintTop_toBottomOf="@+id/con1" />
+
+    <TextView
+        android:id="@+id/con3"
+        android:layout_width="380dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:onClick="openChat"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/recyclerView"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/recyclerView"
+        app:layout_constraintTop_toBottomOf="@+id/con2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
