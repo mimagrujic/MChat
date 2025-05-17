@@ -38,7 +38,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         User user = userList.get(position);
-        holder.nameTextView.setText(user.getName() + " " + user.getSurname());
+        holder.nameTextView.setText(user.getUsername());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,8 +70,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         } else {
             text = text.toLowerCase();
             for (User user : userListFull) {
-                String fullName = user.getName() + " " + user.getSurname();
-                if (fullName.toLowerCase().contains(text)) {
+                if (user.getUsername().contains(text)) {
                     userList.add(user);
                 }
             }

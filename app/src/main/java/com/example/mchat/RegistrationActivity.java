@@ -68,7 +68,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     return;
                 }
                 else {
-                    User user = new User(name, surname, phone, password);
+                    User user = new User(name, surname, username, phone, password);
                     usersRef.child(username).setValue(user);
                     Intent i = new Intent(RegistrationActivity.this, UserActivity.class);
                     i.putExtra("name", name);
