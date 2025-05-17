@@ -16,9 +16,9 @@ public class ConversationActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         String name = i.getStringExtra("name");
-        long phone = i.getLongExtra("phone", 0);
+        String surname = i.getStringExtra("surname");
 
         TextView contName = findViewById(R.id.conName);
-        contName.setText(name + "\n" + "0" + phone);
+        contName.setText(name + " " + surname);
     }
 }

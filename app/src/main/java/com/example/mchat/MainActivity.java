@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         usersRef = firebaseDatabase.getReference("users");
 
         TextView regAcc = findViewById(R.id.registerHere);
+
         regAcc.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -88,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
                     User user = child.getValue(User.class);
                     if(user.getPassword().equals(paswrd)) {
                         Intent i = new Intent(MainActivity.this, UserActivity.class);
+                        i.putExtra("name", user.getName());
                         i.putExtra("username", enteredUser);
                         startActivity(i);
                     }

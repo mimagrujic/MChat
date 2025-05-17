@@ -64,14 +64,14 @@ public class RegistrationActivity extends AppCompatActivity {
                     return;
                 }
                 else if(!password.equals(passwordRepeated)) {
-                    Toast.makeText(RegistrationActivity.this, "Passwords don't match.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistrationActivity.this, "Password mismatch.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else {
                     User user = new User(name, surname, phone, password);
                     usersRef.child(username).setValue(user);
                     Intent i = new Intent(RegistrationActivity.this, UserActivity.class);
-                    i.putExtra("username", username);
+                    i.putExtra("name", name);
                     startActivity(i);
                 }
             }
