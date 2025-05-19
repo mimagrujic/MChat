@@ -57,8 +57,10 @@ public class UserActivity extends AppCompatActivity {
             @Override
             public void onItemClick(User user) {
                 Intent intent = new Intent(UserActivity.this, ConversationActivity.class);
-                intent.putExtra("name", user.getName());
-                intent.putExtra("surname", user.getSurname());
+                intent.putExtra("recipientName", user.getName());
+                intent.putExtra("recipientSurname", user.getSurname());
+                intent.putExtra("recipientUsername", user.getUsername());
+                intent.putExtra("senderUsername", username);
                 startActivity(intent);
             }
         });

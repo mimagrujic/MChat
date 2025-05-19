@@ -2,12 +2,41 @@ package com.example.mchat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConversationActivity extends AppCompatActivity {
+
+    private String senderUsername;
+    private String recipientUsername;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference chatRef;
+    private RecyclerView convoSpace;
+    private EditText typeInMessage;
+    private ImageButton sendButton;
+    private ChatAdapter chatAdapter;
+    private List<Message> messages;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,10 +44,104 @@ public class ConversationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_conversation);
 
         Intent i = getIntent();
-        String name = i.getStringExtra("name");
-        String surname = i.getStringExtra("surname");
+        String recipientName = i.getStringExtra("recipientName");
+        String recipientSurname = i.getStringExtra("recipientSurname");
+        recipientUsername = i.getStringExtra("recipientUsername");
+        senderUsername = i.getStringExtra("senderUsername");
 
         TextView contName = findViewById(R.id.conName);
-        contName.setText(name + " " + surname);
+        contName.setText(recipientName + " " + recipientSurname);
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        String chatId = senderUsername.compareTo(recipientUsername) < 0 ?
+                senderUsername + "-" + recipientUsername : recipientUsername + "-" + senderUsername;
+        chatRef = firebaseDatabase.getReference("chats").child(chatId);
+
+        convoSpace = findViewById(R.id.convoRecyclerView);
+        typeInMessage = findViewById(R.id.typeMessage);
+        sendButton = findViewById(R.id.sendMessage);
+        messages = new ArrayList<>();
+        chatAdapter = new ChatAdapter(this, messages, senderUsername);
+        convoSpace.setAdapter(chatAdapter);
+        convoSpace.setLayoutManager(new LinearLayoutManager(this));
+
+        chatRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            //snapshot is a pic of state of my current ref (chatRef)
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                messages.clear();
+                //children are messages of chatRef (conversation between user1 and user 2)
+                for(DataSnapshot child : snapshot.getChildren()) {
+                    Message message = child.getValue(Message.class);
+                    if(message != null &&
+                            (message.getSender().equals(senderUsername) && message.getReceiver().equals(recipientUsername)) ||
+                            (message.getSender().equals(recipientUsername) && message.getReceiver().equals(senderUsername))) {
+                        messages.add(message);
+                    }
+                }
+                chatAdapter.notifyDataSetChanged();
+                convoSpace.scrollToPosition(messages.size() - 1);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(ConversationActivity.this, "Unable to load messages.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        sendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String msg = typeInMessage.getText().toString().trim();
+                if(!msg.isEmpty()) {
+                    sendMessage(msg);
+                    typeInMessage.setText("");
+                }
+            }
+        });
+
+        typeInMessage.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(event != null
+                        && event.getAction() == KeyEvent.ACTION_DOWN
+                        && event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                    String message = typeInMessage.getText().toString().trim();
+                    if(!message.isEmpty()) {
+                        sendMessage(message);
+                        typeInMessage.setText("");
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        convoSpace.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                LinearLayoutManager layoutManager = (LinearLayoutManager) convoSpace.getLayoutManager();
+                int firstVisibleMessage = layoutManager.findFirstVisibleItemPosition();
+                int lastScrollIndex = firstVisibleMessage;
+                int offset = 5;
+                if(dy < 0) {
+                    if(lastScrollIndex - offset < 0)
+                        lastScrollIndex = 0;
+                    else
+                        lastScrollIndex = lastScrollIndex - offset;
+                    recyclerView.smoothScrollToPosition(lastScrollIndex);
+                }
+            }
+
+
+        });
+    }
+
+    private void sendMessage(String msg) {
+        String messageId = chatRef.push().getKey();
+        Message message = new Message(messageId, senderUsername, recipientUsername, msg, System.currentTimeMillis());
+        if(messageId != null)
+            chatRef.child(messageId).setValue(message);
     }
 }

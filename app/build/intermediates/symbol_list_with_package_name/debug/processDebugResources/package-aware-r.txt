@@ -3062,6 +3062,7 @@ drawable ic_clock_black_24dp
 drawable ic_keyboard_black_24dp
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+drawable ic_launcher_send_pic_background
 drawable ic_m3_chip_check
 drawable ic_m3_chip_checked_circle
 drawable ic_m3_chip_close
@@ -3143,7 +3144,8 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
-drawable screenshot_2025_05_10_192413
+drawable received_message
+drawable sent_message
 drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
@@ -3282,6 +3284,7 @@ id content
 id contentPanel
 id contiguous
 id continuousVelocity
+id convoRecyclerView
 id coordinator
 id cos
 id counterclockwise
@@ -3369,6 +3372,7 @@ id home
 id homeAsUp
 id honorRequest
 id horizontal
+id horizontalLayout
 id horizontal_only
 id icon
 id icon_group
@@ -3561,6 +3565,7 @@ id search_voice_btn
 id select_dialog_listview
 id selected
 id selection_type
+id sendMessage
 id sharedValueSet
 id sharedValueUnset
 id shortcut
@@ -3619,6 +3624,8 @@ id textEnd
 id textInputLayout
 id textInputLayout2
 id textInputLayout3
+id textMessageReceived
+id textMessageSent
 id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
@@ -3655,6 +3662,7 @@ id transition_position
 id transition_scene_layoutid_cache
 id transition_transform
 id triangle
+id typeMessage
 id unchecked
 id uniform
 id unlabeled
@@ -3820,6 +3828,8 @@ layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity
+layout item_chat_received
+layout item_chat_sent
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
 layout m3_alert_dialog_title
@@ -3884,6 +3894,9 @@ layout support_simple_spinner_dropdown_item
 mipmap ic_launcher
 mipmap ic_launcher_foreground
 mipmap ic_launcher_round
+mipmap ic_launcher_send_pic
+mipmap ic_launcher_send_pic_foreground
+mipmap ic_launcher_send_pic_round
 plurals mtrl_badge_content_description
 raw firebase_common_keep
 string abc_action_bar_home_description
