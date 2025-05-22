@@ -1,0 +1,5 @@
+com.example.mchat.test.app-core-1.6.1-0 C:\Users\mimag\.gradle\caches\8.11.1\transforms\a83925ad740c37bc1dd1c68f8db51f88\transformed\core-1.6.1\res
+com.example.mchat.test.app-androidTest-1 C:\Users\mimag\AndroidStudioProjects\MChat\app\build\generated\res\resValues\androidTest\debug
+com.example.mchat.test.app-mergeDebugAndroidTestResources-2 C:\Users\mimag\AndroidStudioProjects\MChat\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.example.mchat.test.app-mergeDebugAndroidTestResources-3 C:\Users\mimag\AndroidStudioProjects\MChat\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.example.mchat.test.app-debugAndroidTest-4 C:\Users\mimag\AndroidStudioProjects\MChat\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources

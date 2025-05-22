@@ -3,7 +3,6 @@ package com.example.mchat;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -27,7 +26,10 @@ public class UserActivity extends AppCompatActivity {
 
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference usersRef;
+    private DatabaseReference chatsRef;
+    private List<String> chats = new ArrayList<>();
     private List<User> users = new ArrayList<>();
+    private List<User> allUsers = new ArrayList<>();
     private RecyclerView recyclerView;
     private UserAdapter userAdapter;
 
@@ -39,6 +41,7 @@ public class UserActivity extends AppCompatActivity {
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         usersRef = firebaseDatabase.getReference("users");
+        chatsRef = firebaseDatabase.getReference("chats");
 
         Intent i = getIntent();
         String name = i.getStringExtra("name");
@@ -53,7 +56,7 @@ public class UserActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        userAdapter = new UserAdapter(new ArrayList<>(), new UserAdapter.OnItemClickListener() {
+        userAdapter = new UserAdapter(username, new ArrayList<>(), chats, new UserAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(User user) {
                 Intent intent = new Intent(UserActivity.this, ConversationActivity.class);
@@ -66,25 +69,21 @@ public class UserActivity extends AppCompatActivity {
         });
         recyclerView.setAdapter(userAdapter);
 
-        usersRef.addValueEventListener(new ValueEventListener() {
+        chatsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                users.clear();
-                for (DataSnapshot userSnapshot : snapshot.getChildren()) {
-                    User user = userSnapshot.getValue(User.class);
-                    String usernameKey = userSnapshot.getKey();
-                    if (user != null && !username.equals(usernameKey)) {
-                        users.add(user);
+                for(DataSnapshot child : snapshot.getChildren()) {
+                    if(child != null && child.getKey().contains(username)) {
+                        chats.add(child.getKey());
                     }
                 }
-                userAdapter.updateUsers(users);
+                fetchUsersFromDatabase(username);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.e("UserActivity", "Error with loading data. " + error.getMessage());
             }
-
         });
 
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -95,14 +94,45 @@ public class UserActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                userAdapter.filter(newText);
-                return true;
+                if(newText.isEmpty()) {
+                    //fetchUsersFromDatabase(username);// --> works, but no need for it
+                    userAdapter.updateUsers(users, allUsers);
+                } else {
+                    userAdapter.filter(newText);
+                }
+                return false;
             }
         });
 
 
     }
 
+    private void fetchUsersFromDatabase(String username) {
+        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                users.clear();
+                for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                    User user = userSnapshot.getValue(User.class);
+                    String otherUserId = userSnapshot.getKey();
+                    if (user != null && !username.equals(otherUserId)) {
+                        allUsers.add(user);
+                        for(String id : chats) {
+                            if (id.contains(otherUserId)) {
+                                users.add(user);
+                            }
+                        }
 
+                    }
+                }
+                userAdapter.updateUsers(users, allUsers);
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("UserActivity", "Error with loading data. " + error.getMessage());
+            }
+
+        });
+    }
 }

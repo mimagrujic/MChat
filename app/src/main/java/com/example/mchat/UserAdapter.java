@@ -3,6 +3,7 @@ package com.example.mchat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,16 +14,21 @@ import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder>{
 
+    private String currentUser;
     private List<User>  userList;
-    private List<User> userListFull;
+    private List<User> allUsers;
     private OnItemClickListener listener;
+    private List<String> chats;
 
-    public UserAdapter(List<User> userList, OnItemClickListener listener) {
+    public UserAdapter(String currentUser, List<User> userList, List<String> chats, OnItemClickListener listener) {
+        this.currentUser = currentUser;
         this.userList = new ArrayList<>(userList);
-        this.userListFull = new ArrayList<>(userList);
+        this.chats = new ArrayList<>(chats);
+        this.allUsers = new ArrayList<>(userList);
         this.listener = listener;
     }
 
+    //using this to be able to start a chat
     public interface OnItemClickListener {
         void onItemClick(User user);
     }
@@ -54,11 +60,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         return userList.size();
     }
 
-    public void updateUsers(List<User> newUsers) {
+    public void updateUsers(List<User> newUsers, List<User> all) {
         userList.clear();
         userList.addAll(newUsers);
-        userListFull.clear();
-        userListFull.addAll(newUsers);
+        allUsers.clear();
+        allUsers.addAll(all);
 
         notifyDataSetChanged();
     }
@@ -66,16 +72,18 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     public void filter(String text) {
         userList.clear();
         if (text.isEmpty()) {
-            userList.addAll(userListFull);
+           // userList.addAll(allUsers);
+
         } else {
             text = text.toLowerCase();
-            for (User user : userListFull) {
+            for (User user : allUsers) {
                 if (user.getUsername().contains(text)) {
                     userList.add(user);
                 }
             }
         }
         notifyDataSetChanged();
+
     }
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
