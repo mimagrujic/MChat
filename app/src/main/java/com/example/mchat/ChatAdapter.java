@@ -1,6 +1,7 @@
 package com.example.mchat;
 
 import android.content.Context;
+import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,6 +75,9 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
         public void bind(@NonNull Message message) {
             textMessage.setText(message.getText());
+            TextView time = itemView.findViewById(R.id.time_bubble);
+            String formattedTime = DateFormat.format("hh:mm a", message.getTime()).toString();
+            time.setText(formattedTime);
             DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
             int maxWidth = (int) (displayMetrics.widthPixels * 0.75);
             textMessage.setMaxWidth(maxWidth);
@@ -88,6 +92,9 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
         public void bind(@NonNull Message message) {
             textMessage.setText(message.getText());
+            TextView time = itemView.findViewById(R.id.time_bubble);
+            String formattedTime = DateFormat.format("hh:mm a", message.getTime()).toString();
+            time.setText(formattedTime);
             DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
             int maxWidth = (int) (displayMetrics.widthPixels * 0.75);
             textMessage.setMaxWidth(maxWidth);

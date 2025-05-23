@@ -11,6 +11,8 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,8 +34,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         usersRef = firebaseDatabase.getReference("users");
-
-
     }
 
     public void registerUser(View view) {
@@ -60,19 +60,34 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.hasChild(username)) {
-                    Toast.makeText(RegistrationActivity.this, "Username has already been taken.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistrationActivity.this, "Username has already been taken.",
+                            Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else if(!password.equals(passwordRepeated)) {
-                    Toast.makeText(RegistrationActivity.this, "Password mismatch.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistrationActivity.this, "Password mismatch.",
+                            Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else {
                     User user = new User(name, surname, username, phone, password);
-                    usersRef.child(username).setValue(user);
-                    Intent i = new Intent(RegistrationActivity.this, UserActivity.class);
-                    i.putExtra("name", name);
-                    startActivity(i);
+                    usersRef.child(username).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()) {
+                                Intent i = new Intent(RegistrationActivity.this, UserActivity.class);
+                                i.putExtra("name", name);
+                                i.putExtra("username", username);
+                                startActivity(i);
+                            } else {
+                                Toast.makeText(RegistrationActivity.this, "Registration failed.",
+                                        Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        }
+                    });
+
+
                 }
             }
 

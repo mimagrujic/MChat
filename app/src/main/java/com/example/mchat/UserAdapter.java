@@ -71,10 +71,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     public void filter(String text) {
         userList.clear();
-        if (text.isEmpty()) {
-           // userList.addAll(allUsers);
-
-        } else {
+        if (!text.isEmpty()) {
             text = text.toLowerCase();
             for (User user : allUsers) {
                 if (user.getUsername().contains(text)) {
@@ -83,7 +80,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             }
         }
         notifyDataSetChanged();
-
     }
 
     public class UserViewHolder extends RecyclerView.ViewHolder {

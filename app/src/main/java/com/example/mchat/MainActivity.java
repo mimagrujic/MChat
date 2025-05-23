@@ -92,7 +92,13 @@ public class MainActivity extends AppCompatActivity {
                         i.putExtra("name", user.getName());
                         i.putExtra("username", enteredUser);
                         startActivity(i);
+                    } else {
+                        Toast.makeText(MainActivity.this, "Invalid password.", Toast.LENGTH_SHORT).show();
+                        return;
                     }
+                } else {
+                    Toast.makeText(MainActivity.this, "Invalid username.", Toast.LENGTH_SHORT).show();
+                    return;
                 }
             }
 

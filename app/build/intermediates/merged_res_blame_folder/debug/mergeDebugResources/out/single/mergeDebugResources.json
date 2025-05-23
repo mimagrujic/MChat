@@ -72,6 +72,10 @@
         "source": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-main-38:\\mipmap-xhdpi\\ic_launcher.webp"
     },
     {
+        "merged": "com.example.mchat.app-debug-36:/layout_item_chat_received.xml.flat",
+        "source": "com.example.mchat.app-main-38:/layout/item_chat_received.xml"
+    },
+    {
         "merged": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-debug-36:\\drawable_ic_launcher_send_pic_background.xml.flat",
         "source": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-main-38:\\drawable\\ic_launcher_send_pic_background.xml"
     },
@@ -180,10 +184,6 @@
         "source": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-main-38:\\mipmap-hdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.mchat.app-debug-36:/layout_activity_conversation.xml.flat",
-        "source": "com.example.mchat.app-main-38:/layout/activity_conversation.xml"
-    },
-    {
         "merged": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-debug-36:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
         "source": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-main-38:\\mipmap-anydpi-v26\\ic_launcher.xml"
     },
@@ -194,5 +194,9 @@
     {
         "merged": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-debug-36:\\mipmap-xxxhdpi_ic_launcher_send_pic_foreground.webp.flat",
         "source": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-main-38:\\mipmap-xxxhdpi\\ic_launcher_send_pic_foreground.webp"
+    },
+    {
+        "merged": "com.example.mchat.app-debug-36:/layout_item_chat_sent.xml.flat",
+        "source": "com.example.mchat.app-main-38:/layout/item_chat_sent.xml"
     }
 ]

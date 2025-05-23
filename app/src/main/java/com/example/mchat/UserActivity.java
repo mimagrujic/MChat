@@ -72,6 +72,7 @@ public class UserActivity extends AppCompatActivity {
         chatsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                chats.clear();
                 for(DataSnapshot child : snapshot.getChildren()) {
                     if(child != null && child.getKey().contains(username)) {
                         chats.add(child.getKey());
@@ -112,6 +113,7 @@ public class UserActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 users.clear();
+                allUsers.clear();
                 for (DataSnapshot userSnapshot : snapshot.getChildren()) {
                     User user = userSnapshot.getValue(User.class);
                     String otherUserId = userSnapshot.getKey();

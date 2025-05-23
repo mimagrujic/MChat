@@ -34,6 +34,7 @@ id textView
 id textView2
 id textView5
 id textView6
+id time_bubble
 id typeMessage
 id username
 id welcome
