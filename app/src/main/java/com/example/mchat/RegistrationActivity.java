@@ -71,23 +71,11 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
                 else {
                     User user = new User(name, surname, username, phone, password);
-                    usersRef.child(username).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()) {
-                                Intent i = new Intent(RegistrationActivity.this, UserActivity.class);
-                                i.putExtra("name", name);
-                                i.putExtra("username", username);
-                                startActivity(i);
-                            } else {
-                                Toast.makeText(RegistrationActivity.this, "Registration failed.",
-                                        Toast.LENGTH_SHORT).show();
-                                return;
-                            }
-                        }
-                    });
-
-
+                    usersRef.child(username).setValue(user);
+                    Intent i = new Intent(RegistrationActivity.this, UserActivity.class);
+                    i.putExtra("name", name);
+                    i.putExtra("username", username);
+                    startActivity(i);
                 }
             }
 
