@@ -1,6 +1,7 @@
 package com.example.mchat;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -75,10 +76,16 @@ public class RegistrationActivity extends AppCompatActivity {
                         String hash = scryptHash.hashPassword(password);
                         User user = new User(name, surname, username, phone, hash);
                         usersRef.child(username).setValue(user);
-                        Intent i = new Intent(RegistrationActivity.this, UserActivity.class);
-                        i.putExtra("name", name);
-                        i.putExtra("username", username);
-                        startActivity(i);
+
+                        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("isLoggedIn", true);
+                        editor.putString("username", username);
+                        editor.putString("name", user.getName());
+                        editor.apply();
+                        startActivity(new Intent(RegistrationActivity.this, UserActivity.class));
+                        finish();
+
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }

@@ -1,17 +1,24 @@
 package com.example.mchat;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,6 +39,7 @@ public class UserActivity extends AppCompatActivity {
     private List<User> allUsers = new ArrayList<>();
     private RecyclerView recyclerView;
     private UserAdapter userAdapter;
+    public String USER;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +51,11 @@ public class UserActivity extends AppCompatActivity {
         usersRef = firebaseDatabase.getReference("users");
         chatsRef = firebaseDatabase.getReference("chats");
 
-        Intent i = getIntent();
-        String name = i.getStringExtra("name");
-        String username = i.getStringExtra("username");
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        boolean isLogedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+        String username = sharedPreferences.getString("username", null);
+        String name = sharedPreferences.getString("name", null);
+        USER = username;
 
         TextView welcome = findViewById(R.id.welcome);
         welcome.setText("Welcome, " + name + "!");
@@ -136,5 +146,42 @@ public class UserActivity extends AppCompatActivity {
             }
 
         });
+    }
+
+    public void deleteUser(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(UserActivity.this);
+        builder.setTitle("Account Deactivation")
+        .setMessage("Are you sure you want to delete your account? Once you delete it, you won't be able to log in again.")
+        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                DatabaseReference userRef = usersRef.child(USER);
+                userRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()) {
+                            Toast.makeText(UserActivity.this, "Account deleted.", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(UserActivity.this, MainActivity.class);
+                            startActivity(i);
+                        } else {
+                            Toast.makeText(UserActivity.this, "Failed to delete account.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+            }
+        })
+        .setNegativeButton("No", null)
+        .show();
+
+    }
+
+    public void logOutUser(View view) {
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("isLoggedIn", false);
+        editor.remove("username");
+        editor.apply();
+        startActivity(new Intent(UserActivity.this, MainActivity.class));
+        finish();
     }
 }

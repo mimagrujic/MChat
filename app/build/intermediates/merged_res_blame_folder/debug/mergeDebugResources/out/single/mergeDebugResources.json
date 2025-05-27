@@ -16,12 +16,12 @@
         "source": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-main-38:\\mipmap-anydpi-v26\\ic_launcher_send_pic_round.xml"
     },
     {
-        "merged": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-debug-36:\\mipmap-xhdpi_ic_launcher_send_pic_round.webp.flat",
-        "source": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-main-38:\\mipmap-xhdpi\\ic_launcher_send_pic_round.webp"
-    },
-    {
         "merged": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-debug-36:\\mipmap-hdpi_ic_launcher_send_pic_foreground.webp.flat",
         "source": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-main-38:\\mipmap-hdpi\\ic_launcher_send_pic_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-debug-36:\\mipmap-xhdpi_ic_launcher_send_pic_round.webp.flat",
+        "source": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-main-38:\\mipmap-xhdpi\\ic_launcher_send_pic_round.webp"
     },
     {
         "merged": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-debug-36:\\mipmap-hdpi_ic_launcher_send_pic_round.webp.flat",
@@ -68,20 +68,20 @@
         "source": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-main-38:\\drawable\\ic_launcher_background.xml"
     },
     {
+        "merged": "com.example.mchat.app-debug-36:/layout_activity_user.xml.flat",
+        "source": "com.example.mchat.app-main-38:/layout/activity_user.xml"
+    },
+    {
         "merged": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-debug-36:\\mipmap-xhdpi_ic_launcher.webp.flat",
         "source": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-main-38:\\mipmap-xhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.example.mchat.app-debug-36:/layout_item_chat_received.xml.flat",
-        "source": "com.example.mchat.app-main-38:/layout/item_chat_received.xml"
+        "merged": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-debug-36:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-main-38:\\layout\\activity_main.xml"
     },
     {
         "merged": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-debug-36:\\drawable_ic_launcher_send_pic_background.xml.flat",
         "source": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-main-38:\\drawable\\ic_launcher_send_pic_background.xml"
-    },
-    {
-        "merged": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-debug-36:\\layout_activity_main.xml.flat",
-        "source": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-main-38:\\layout\\activity_main.xml"
     },
     {
         "merged": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-debug-36:\\mipmap-xxxhdpi_ic_launcher_foreground.webp.flat",
@@ -116,12 +116,12 @@
         "source": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-main-38:\\drawable\\ic_launcher_foreground.xml"
     },
     {
-        "merged": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-debug-36:\\mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-main-38:\\mipmap-mdpi\\ic_launcher.webp"
-    },
-    {
         "merged": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-debug-36:\\layout_activity_user.xml.flat",
         "source": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-main-38:\\layout\\activity_user.xml"
+    },
+    {
+        "merged": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-debug-36:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-main-38:\\mipmap-mdpi\\ic_launcher.webp"
     },
     {
         "merged": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-debug-36:\\xml_backup_rules.xml.flat",
@@ -194,9 +194,5 @@
     {
         "merged": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-debug-36:\\mipmap-xxxhdpi_ic_launcher_send_pic_foreground.webp.flat",
         "source": "C:\\Users\\mimag\\.gradle\\daemon\\8.11.1\\com.example.mchat.app-main-38:\\mipmap-xxxhdpi\\ic_launcher_send_pic_foreground.webp"
-    },
-    {
-        "merged": "com.example.mchat.app-debug-36:/layout_item_chat_sent.xml.flat",
-        "source": "com.example.mchat.app-main-38:/layout/item_chat_sent.xml"
     }
 ]

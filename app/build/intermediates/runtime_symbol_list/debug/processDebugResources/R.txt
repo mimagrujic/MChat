@@ -3298,6 +3298,7 @@ int id decelerate 0x7f080092
 int id decelerateAndComplete 0x7f080093
 int id decor_content_parent 0x7f080094
 int id default_activity_button 0x7f080095
+int id delUser 0x7f080221
 int id deltaRelative 0x7f080096
 int id dependency_ordering 0x7f080097
 int id design_bottom_sheet 0x7f080098
@@ -3402,6 +3403,7 @@ int id linear 0x7f0800fa
 int id listMode 0x7f0800fb
 int id list_item 0x7f0800fc
 int id logIn 0x7f0800fd
+int id logOut 0x7f080222
 int id m3_side_sheet 0x7f0800fe
 int id main 0x7f0800ff
 int id mainTitle 0x7f080100

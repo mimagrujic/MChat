@@ -1,6 +1,7 @@
 package com.example.mchat;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
@@ -47,6 +48,19 @@ public class MainActivity extends AppCompatActivity {
         usersRef = firebaseDatabase.getReference("users");
 
         TextView regAcc = findViewById(R.id.registerHere);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        boolean isLogedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+        String username = sharedPreferences.getString("username", null);
+
+        if(isLogedIn && username != null){
+            /*SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("isLoggedIn", false);
+            editor.remove("username");
+            editor.apply();*/  //do this if you need to log out user forcefully
+            startActivity(new Intent(MainActivity.this, UserActivity.class));
+            finish();
+        }
 
         regAcc.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -95,10 +109,15 @@ public class MainActivity extends AppCompatActivity {
                         throw new RuntimeException(e);
                     }
                     if(correctPassword) {
-                        Intent i = new Intent(MainActivity.this, UserActivity.class);
-                        i.putExtra("name", user.getName());
-                        i.putExtra("username", enteredUser);
-                        startActivity(i);
+                        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("isLoggedIn", true);
+                        editor.putString("username", enteredUser);
+                        editor.putString("name", user.getName());
+                        editor.apply();
+                        startActivity(new Intent(MainActivity.this, UserActivity.class));
+                        finish();
+
                     } else {
                         Toast.makeText(MainActivity.this, "Invalid password.", Toast.LENGTH_SHORT).show();
                         return;

@@ -9,8 +9,10 @@ drawable received_message
 drawable sent_message
 id conName
 id convoRecyclerView
+id delUser
 id horizontalLayout
 id logIn
+id logOut
 id main
 id mainTitle
 id makeAcc
