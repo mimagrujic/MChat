@@ -76,6 +76,13 @@ public class ConversationActivity extends AppCompatActivity {
                     if(message != null &&
                             (message.getSender().equals(senderUsername) && message.getReceiver().equals(recipientUsername)) ||
                             (message.getSender().equals(recipientUsername) && message.getReceiver().equals(senderUsername))) {
+                        try {
+                            String decryptedMessage = CryptoManager.decrypt(
+                                    message.getIv() + ":" + message.getText());
+                            message.setText(decryptedMessage);
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
                         messages.add(message);
                     }
                 }
@@ -94,7 +101,11 @@ public class ConversationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String msg = typeInMessage.getText().toString().trim();
                 if(!msg.isEmpty()) {
-                    sendMessage(msg);
+                    try {
+                        sendMessage(msg);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
                     typeInMessage.setText("");
                 }
             }
@@ -108,7 +119,11 @@ public class ConversationActivity extends AppCompatActivity {
                         && event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
                     String message = typeInMessage.getText().toString().trim();
                     if(!message.isEmpty()) {
-                        sendMessage(message);
+                        try {
+                            sendMessage(message);
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
                         typeInMessage.setText("");
                     }
                     return true;
@@ -138,9 +153,16 @@ public class ConversationActivity extends AppCompatActivity {
         });
     }
 
-    private void sendMessage(String msg) {
+    private void sendMessage(String msg) throws Exception {
         String messageId = chatRef.push().getKey();
-        Message message = new Message(messageId, senderUsername, recipientUsername, msg, System.currentTimeMillis());
+        String encryptedData = CryptoManager.encrypt(msg);
+        String[] encryptedParts = encryptedData.split(":");
+        if (encryptedParts.length != 2) {
+            return;
+        }
+        String iv = encryptedParts[0];
+        String text = encryptedParts[1];
+        Message message = new Message(messageId, senderUsername, recipientUsername, text, iv, System.currentTimeMillis());
         if(messageId != null)
             chatRef.child(messageId).setValue(message);
     }
