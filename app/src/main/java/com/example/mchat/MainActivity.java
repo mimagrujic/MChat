@@ -87,7 +87,14 @@ public class MainActivity extends AppCompatActivity {
                 if(snapshot.hasChild(enteredUser)) {
                     DataSnapshot child = snapshot.child(enteredUser);
                     User user = child.getValue(User.class);
-                    if(user.getPassword().equals(paswrd)) {
+                    ScryptHash scryptHash = new ScryptHash();
+                    boolean correctPassword = false;
+                    try {
+                        correctPassword = scryptHash.verifyPassword(user.getPassword(), paswrd);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                    if(correctPassword) {
                         Intent i = new Intent(MainActivity.this, UserActivity.class);
                         i.putExtra("name", user.getName());
                         i.putExtra("username", enteredUser);

@@ -70,12 +70,18 @@ public class RegistrationActivity extends AppCompatActivity {
                     return;
                 }
                 else {
-                    User user = new User(name, surname, username, phone, password);
-                    usersRef.child(username).setValue(user);
-                    Intent i = new Intent(RegistrationActivity.this, UserActivity.class);
-                    i.putExtra("name", name);
-                    i.putExtra("username", username);
-                    startActivity(i);
+                    ScryptHash scryptHash = new ScryptHash();
+                    try {
+                        String hash = scryptHash.hashPassword(password);
+                        User user = new User(name, surname, username, phone, hash);
+                        usersRef.child(username).setValue(user);
+                        Intent i = new Intent(RegistrationActivity.this, UserActivity.class);
+                        i.putExtra("name", name);
+                        i.putExtra("username", username);
+                        startActivity(i);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
 
