@@ -1,5 +1,6 @@
 package com.example.mchat;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,7 +25,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ConversationActivity extends AppCompatActivity {
 
@@ -61,7 +65,31 @@ public class ConversationActivity extends AppCompatActivity {
         typeInMessage = findViewById(R.id.typeMessage);
         sendButton = findViewById(R.id.sendMessage);
         messages = new ArrayList<>();
-        chatAdapter = new ChatAdapter(this, messages, senderUsername);
+        chatAdapter = new ChatAdapter(this, messages, senderUsername, new ChatAdapter.OnItemClickListener() {
+            @Override
+            public void onItemLongClick(Message msg) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ConversationActivity.this);
+                builder.setTitle("Delete a message")
+                        .setMessage("Are you sure you want to delete this message?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                chatRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        chatRef.child(msg.getId()).removeValue();
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        Log.e("ConversationActivity", "Error with deleting a message." + error.getMessage());
+                                    }
+                                });
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            }
+        });
         convoSpace.setAdapter(chatAdapter);
         convoSpace.setLayoutManager(new LinearLayoutManager(this));
 

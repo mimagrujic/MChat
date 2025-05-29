@@ -114,7 +114,7 @@ public class UserActivity extends AppCompatActivity {
 
                                     @Override
                                     public void onCancelled(@NonNull DatabaseError error) {
-                                        Log.e("UserActivity", "Error with loading data. " + error.getMessage());
+                                        Log.e("UserActivity", "Error with deleting conversation. " + error.getMessage());
                                     }
                                 });
                             }

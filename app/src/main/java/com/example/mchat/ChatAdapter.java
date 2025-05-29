@@ -21,11 +21,17 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Message> messageList;
     private String currentUserId;
     private Context context;
+    private OnItemClickListener listener;
 
-    public ChatAdapter(Context context, List<Message> messageList, String currentUserId) {
+    public ChatAdapter(Context context, List<Message> messageList, String currentUserId, OnItemClickListener listener) {
         this.context = context;
         this.messageList = messageList;
         this.currentUserId = currentUserId;
+        this.listener = listener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemLongClick(Message msg);
     }
 
     @Override
@@ -73,14 +79,27 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             super(view);
             textMessage = itemView.findViewById(R.id.textMessageSent);
         }
-        public void bind(@NonNull Message message) {
-            textMessage.setText(message.getText());
+        public void bind(@NonNull Message msg) {
+            textMessage.setText(msg.getText());
             TextView time = itemView.findViewById(R.id.time_bubble);
-            String formattedTime = DateFormat.format("hh:mm a", message.getTime()).toString();
+            String formattedTime = DateFormat.format("hh:mm a", msg.getTime()).toString();
             time.setText(formattedTime);
             DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
             int maxWidth = (int) (displayMetrics.widthPixels * 0.75);
             textMessage.setMaxWidth(maxWidth);
+
+            if(this instanceof SentViewHolder) {
+                textMessage.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        if (listener != null) {
+                            listener.onItemLongClick(msg);
+                        }
+                        return true;
+                    }
+                });
+            }
+
         }
     }
 
@@ -90,10 +109,10 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             super(view);
             textMessage = itemView.findViewById(R.id.textMessageReceived);
         }
-        public void bind(@NonNull Message message) {
-            textMessage.setText(message.getText());
+        public void bind(@NonNull Message msg) {
+            textMessage.setText(msg.getText());
             TextView time = itemView.findViewById(R.id.time_bubble);
-            String formattedTime = DateFormat.format("hh:mm a", message.getTime()).toString();
+            String formattedTime = DateFormat.format("hh:mm a", msg.getTime()).toString();
             time.setText(formattedTime);
             DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
             int maxWidth = (int) (displayMetrics.widthPixels * 0.75);
