@@ -80,7 +80,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putBoolean("isLoggedIn", true);
-                        editor.putString("username", username);
+                        editor.putString("username", user.getUsername());
                         editor.putString("name", user.getName());
                         editor.apply();
                         startActivity(new Intent(RegistrationActivity.this, UserActivity.class));

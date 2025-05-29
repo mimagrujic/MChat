@@ -73,17 +73,19 @@ public class ConversationActivity extends AppCompatActivity {
                 //children are messages of chatRef (conversation between user1 and user 2)
                 for(DataSnapshot child : snapshot.getChildren()) {
                     Message message = child.getValue(Message.class);
-                    if(message != null &&
-                            (message.getSender().equals(senderUsername) && message.getReceiver().equals(recipientUsername)) ||
-                            (message.getSender().equals(recipientUsername) && message.getReceiver().equals(senderUsername))) {
+                    if(message != null
+                            && message.getVisibleTo().get(senderUsername)
+                            && ((message.getSender().equals(senderUsername) && message.getReceiver().equals(recipientUsername))
+                            || (message.getSender().equals(recipientUsername) && message.getReceiver().equals(senderUsername)))) {
                         try {
                             String decryptedMessage = CryptoManager.decrypt(
                                     message.getIv() + ":" + message.getText());
                             message.setText(decryptedMessage);
+                            messages.add(message);
                         } catch (Exception e) {
                             throw new RuntimeException(e);
                         }
-                        messages.add(message);
+
                     }
                 }
                 chatAdapter.notifyDataSetChanged();

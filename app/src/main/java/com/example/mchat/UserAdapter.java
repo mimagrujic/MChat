@@ -31,6 +31,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     //using this to be able to start a chat
     public interface OnItemClickListener {
         void onItemClick(User user);
+        void onItemLongClick(User user);
     }
 
     @NonNull
@@ -45,12 +46,23 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         User user = userList.get(position);
         holder.nameTextView.setText(user.getUsername());
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(listener != null) {
                     listener.onItemClick(user);
                 }
+            }
+        });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if(listener != null) {
+                    listener.onItemLongClick(user);
+                }
+                return true;
             }
         });
     }

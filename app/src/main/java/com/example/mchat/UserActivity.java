@@ -26,7 +26,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class UserActivity extends AppCompatActivity {
@@ -76,6 +78,50 @@ public class UserActivity extends AppCompatActivity {
                 intent.putExtra("senderUsername", username);
                 startActivity(intent);
             }
+
+            @Override
+            public void onItemLongClick(User user) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(UserActivity.this);
+                builder.setTitle("Delete a conversation")
+                        .setMessage("Are you sure you want to delete this conversation?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                String chatId = username.compareTo(user.getUsername()) < 0 ?
+                                        username + "-" + user.getUsername() : user.getUsername() + "-" + username;
+                                DatabaseReference chat = chatsRef.child(chatId);
+                                chat.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        int i = 0;
+                                        for(DataSnapshot msg : snapshot.getChildren()) {
+                                            i++;
+                                            Message message = msg.getValue(Message.class);
+                                            Map<String, Boolean> map = new HashMap<>();
+                                            map.put(username, false);
+                                            map.put(user.getUsername(), message.getVisibleTo().get(user.getUsername()));
+                                            if(!map.get(username) && !map.get(user.getUsername())) {
+                                                chat.child(message.getId()).removeValue();
+                                                i--;
+                                            } else {
+                                                message.setVisibleTo(map);
+                                                chat.child(message.getId()).setValue(message);
+                                            }
+                                        }
+                                        if(i == 0) {
+                                            chat.removeValue();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        Log.e("UserActivity", "Error with loading data. " + error.getMessage());
+                                    }
+                                });
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            }
         });
         recyclerView.setAdapter(userAdapter);
 
@@ -114,8 +160,6 @@ public class UserActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-
     }
 
     private void fetchUsersFromDatabase(String username) {
@@ -144,7 +188,6 @@ public class UserActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.e("UserActivity", "Error with loading data. " + error.getMessage());
             }
-
         });
     }
 
@@ -160,19 +203,17 @@ public class UserActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()) {
                             Toast.makeText(UserActivity.this, "Account deleted.", Toast.LENGTH_SHORT).show();
-                            Intent i = new Intent(UserActivity.this, MainActivity.class);
-                            startActivity(i);
+                            logOutUser(view);
+
                         } else {
                             Toast.makeText(UserActivity.this, "Failed to delete account.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-
             }
         })
         .setNegativeButton("No", null)
         .show();
-
     }
 
     public void logOutUser(View view) {
