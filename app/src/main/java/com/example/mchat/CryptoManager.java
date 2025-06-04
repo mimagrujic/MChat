@@ -8,6 +8,7 @@ import android.util.Log;
 
 import java.nio.charset.StandardCharsets;
 import java.security.KeyStore;
+import java.security.MessageDigest;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
@@ -16,15 +17,14 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 public class CryptoManager {
+
     public static String encrypt(String plainText, String sender, String recipient) throws Exception {
         String myKey = sender.compareTo(recipient) < 0 ? sender + "-" + recipient : recipient + "-" + sender;
-        ScryptHash scryptHash = new ScryptHash();
-        String hashedData = scryptHash.hashKey(myKey);
-        String[] hashedParts = hashedData.split(":");
-        String salt = hashedParts[0];
-        String myHashedKey = hashedParts[1];
-        byte[] myKeyDecoded = Base64.decode(myHashedKey, Base64.NO_WRAP);
-        SecretKeySpec myKeySpec = new SecretKeySpec(myKeyDecoded, "AES");
+
+        MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+        byte[] hashedKey = messageDigest.digest(myKey.getBytes(StandardCharsets.UTF_8));
+
+        SecretKeySpec myKeySpec = new SecretKeySpec(hashedKey, "AES");
 
         Cipher cipher = Cipher.getInstance("AES/CBC/PKCS7Padding");
         cipher.init(Cipher.ENCRYPT_MODE, myKeySpec);
@@ -35,20 +35,19 @@ public class CryptoManager {
         String ivBase64 = Base64.encodeToString(iv, Base64.NO_WRAP);
         String encryptedMessageBase64 = Base64.encodeToString(encryptedMessage, Base64.NO_WRAP);
 
-        return ivBase64 + ":" + encryptedMessageBase64 + ":" + sender + ":" + recipient + ":" + salt;
+        return ivBase64 + ":" + encryptedMessageBase64 + ":" + sender + ":" + recipient;
     }
 
     public static String decrypt(String encryptedData) throws Exception {
         String[] encryptedParts = encryptedData.split(":");
         String sender = encryptedParts[2];
         String recipient = encryptedParts[3];
-        String salt = encryptedParts[4];
         String myKey = sender.compareTo(recipient) < 0 ? sender + "-" + recipient : recipient + "-" + sender;
-        ScryptHash scryptHash = new ScryptHash();
-        String myHashedKey = scryptHash.hashKey(myKey, salt);
 
-        byte[] myKeyDecoded = Base64.decode(myHashedKey, Base64.NO_WRAP);
-        SecretKeySpec myKeySpec = new SecretKeySpec(myKeyDecoded, "AES");
+        MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+        byte[] hashedKey = messageDigest.digest(myKey.getBytes(StandardCharsets.UTF_8));
+
+        SecretKeySpec myKeySpec = new SecretKeySpec(hashedKey, "AES");
 
         byte[] iv = Base64.decode(encryptedParts[0], Base64.NO_WRAP);
         byte[] encryptedMessage = Base64.decode(encryptedParts[1], Base64.NO_WRAP);

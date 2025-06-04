@@ -112,8 +112,7 @@ public class ConversationActivity extends AppCompatActivity {
                                     message.getIv() +
                                             ":" + message.getText() +
                                             ":" + senderUsername +
-                                            ":" + recipientUsername +
-                                            ":" + message.getSalt());
+                                            ":" + recipientUsername);
                             message.setText(decryptedMessage);
                             messages.add(message);
                         } catch (Exception e) {
@@ -196,7 +195,6 @@ public class ConversationActivity extends AppCompatActivity {
         String iv = encryptedParts[0];
         String text = encryptedParts[1];
         Message message = new Message(messageId, senderUsername, recipientUsername, text, iv, System.currentTimeMillis());
-        message.setSalt(encryptedParts[4]);
         if(messageId != null)
             chatRef.child(messageId).setValue(message);
     }
