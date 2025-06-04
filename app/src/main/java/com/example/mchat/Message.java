@@ -35,7 +35,6 @@ public class Message {
     public String getSalt() { return salt; }
 
     public void setSalt(String salt) { this.salt = salt; }
-
     public void setText(String text) { this.text = text; }
     public void setVisibleTo(Map<String, Boolean> visibleTo) { this.visibleTo = visibleTo; }
 }

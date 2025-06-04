@@ -1,5 +1,6 @@
 package com.example.mchat;
 
+import android.os.Build;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyProperties;
 import android.util.Base64;
@@ -42,7 +43,6 @@ public class CryptoManager {
         String sender = encryptedParts[2];
         String recipient = encryptedParts[3];
         String salt = encryptedParts[4];
-
         String myKey = sender.compareTo(recipient) < 0 ? sender + "-" + recipient : recipient + "-" + sender;
         ScryptHash scryptHash = new ScryptHash();
         String myHashedKey = scryptHash.hashKey(myKey, salt);
@@ -59,6 +59,5 @@ public class CryptoManager {
         byte[] decryptedMessage = cipher.doFinal(encryptedMessage);
 
         return new String(decryptedMessage, StandardCharsets.UTF_8);
-
     }
 }
