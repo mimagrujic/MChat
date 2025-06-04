@@ -28,7 +28,6 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:testOnly="true"
         android:theme="@style/Theme.MChat" >
         <activity
             android:name="com.example.mchat.MainActivity"
@@ -46,7 +45,8 @@
         </activity>
         <activity
             android:name="com.example.mchat.ConversationActivity"
-            android:parentActivityName="com.example.mchat.UserActivity" >
+            android:parentActivityName="com.example.mchat.UserActivity"
+            android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
             android:name="com.example.mchat.RegistrationActivity"

@@ -3,24 +3,24 @@
 3    package="com.example.mchat.test" >
 4
 5    <uses-sdk
-5-->C:\Users\mimag\AndroidStudioProjects\MChat\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest5238176457307531247.xml:5:5-74
+5-->C:\Users\mimag\AndroidStudioProjects\MChat\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest14249582831228917414.xml:5:5-74
 6        android:minSdkVersion="24"
-6-->C:\Users\mimag\AndroidStudioProjects\MChat\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest5238176457307531247.xml:5:15-41
+6-->C:\Users\mimag\AndroidStudioProjects\MChat\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest14249582831228917414.xml:5:15-41
 7        android:targetSdkVersion="35" />
-7-->C:\Users\mimag\AndroidStudioProjects\MChat\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest5238176457307531247.xml:5:42-71
+7-->C:\Users\mimag\AndroidStudioProjects\MChat\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest14249582831228917414.xml:5:42-71
 8
 9    <instrumentation
-9-->C:\Users\mimag\AndroidStudioProjects\MChat\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest5238176457307531247.xml:11:5-15:67
+9-->C:\Users\mimag\AndroidStudioProjects\MChat\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest14249582831228917414.xml:11:5-15:67
 10        android:name="androidx.test.runner.AndroidJUnitRunner"
-10-->C:\Users\mimag\AndroidStudioProjects\MChat\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest5238176457307531247.xml:11:22-76
+10-->C:\Users\mimag\AndroidStudioProjects\MChat\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest14249582831228917414.xml:11:22-76
 11        android:functionalTest="false"
-11-->C:\Users\mimag\AndroidStudioProjects\MChat\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest5238176457307531247.xml:14:22-52
+11-->C:\Users\mimag\AndroidStudioProjects\MChat\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest14249582831228917414.xml:14:22-52
 12        android:handleProfiling="false"
-12-->C:\Users\mimag\AndroidStudioProjects\MChat\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest5238176457307531247.xml:13:22-53
+12-->C:\Users\mimag\AndroidStudioProjects\MChat\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest14249582831228917414.xml:13:22-53
 13        android:label="Tests for com.example.mchat"
-13-->C:\Users\mimag\AndroidStudioProjects\MChat\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest5238176457307531247.xml:15:22-65
+13-->C:\Users\mimag\AndroidStudioProjects\MChat\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest14249582831228917414.xml:15:22-65
 14        android:targetPackage="com.example.mchat" />
-14-->C:\Users\mimag\AndroidStudioProjects\MChat\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest5238176457307531247.xml:12:22-63
+14-->C:\Users\mimag\AndroidStudioProjects\MChat\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest14249582831228917414.xml:12:22-63
 15
 16    <queries>
 16-->[androidx.test:runner:1.6.1] C:\Users\mimag\.gradle\caches\8.11.1\transforms\d921915d0c04b5ad5f4d533a62985744\transformed\runner-1.6.1\AndroidManifest.xml:24:5-28:15
@@ -40,12 +40,12 @@
 22-->[androidx.test:core:1.6.1] C:\Users\mimag\.gradle\caches\8.11.1\transforms\a83925ad740c37bc1dd1c68f8db51f88\transformed\core-1.6.1\AndroidManifest.xml:24:22-69
 23
 24    <application
-24-->C:\Users\mimag\AndroidStudioProjects\MChat\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest5238176457307531247.xml:7:5-9:19
+24-->C:\Users\mimag\AndroidStudioProjects\MChat\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest14249582831228917414.xml:7:5-9:19
 25        android:debuggable="true"
 26        android:extractNativeLibs="false" >
 27        <uses-library android:name="android.test.runner" />
-27-->C:\Users\mimag\AndroidStudioProjects\MChat\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest5238176457307531247.xml:8:9-60
-27-->C:\Users\mimag\AndroidStudioProjects\MChat\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest5238176457307531247.xml:8:23-57
+27-->C:\Users\mimag\AndroidStudioProjects\MChat\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest14249582831228917414.xml:8:9-60
+27-->C:\Users\mimag\AndroidStudioProjects\MChat\app\build\intermediates\tmp\manifest\androidTest\debug\tempFile1ProcessTestManifest14249582831228917414.xml:8:23-57
 28
 29        <activity
 29-->[androidx.test:core:1.6.1] C:\Users\mimag\.gradle\caches\8.11.1\transforms\a83925ad740c37bc1dd1c68f8db51f88\transformed\core-1.6.1\AndroidManifest.xml:27:9-34:20

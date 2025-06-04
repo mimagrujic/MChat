@@ -9,6 +9,7 @@ public class Message {
     private String receiver;
     private String text;
     private  String iv;
+    private String salt;
     private long time;
     private Map<String, Boolean> visibleTo = new HashMap<>();
 
@@ -31,6 +32,9 @@ public class Message {
     public String getIv() { return iv; }
     public long getTime() { return time; }
     public Map<String, Boolean> getVisibleTo() { return visibleTo; }
+    public String getSalt() { return salt; }
+
+    public void setSalt(String salt) { this.salt = salt; }
 
     public void setText(String text) { this.text = text; }
     public void setVisibleTo(Map<String, Boolean> visibleTo) { this.visibleTo = visibleTo; }

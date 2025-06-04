@@ -27,7 +27,7 @@
 18-->[androidx.core:core:1.13.0] C:\Users\mimag\.gradle\caches\8.11.1\transforms\4acb674bf3fd925d5950addd7f4d30fc\transformed\core-1.13.0\AndroidManifest.xml:26:22-94
 19
 20    <application
-20-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:8:5-39:23
+20-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:8:5-40:23
 21        android:allowBackup="true"
 21-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:9:9-35
 22        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -46,48 +46,49 @@
 29-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:14:9-54
 30        android:supportsRtl="true"
 30-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:15:9-35
-31        android:testOnly="true"
-32        android:theme="@style/Theme.MChat" >
-32-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:16:9-43
-33        <activity
-33-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:18:9-26:20
-34            android:name="com.example.mchat.MainActivity"
-34-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:19:13-41
-35            android:exported="true"
-35-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:20:13-36
-36            android:label="MChat" >
-36-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:21:13-34
-37            <intent-filter>
-37-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:22:13-25:29
-38                <action android:name="android.intent.action.MAIN" />
-38-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:23:17-69
-38-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:23:25-66
-39
-40                <category android:name="android.intent.category.LAUNCHER" />
-40-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:24:17-77
-40-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:24:27-74
-41            </intent-filter>
-42        </activity>
-43        <activity
-43-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:27:9-30:20
-44            android:name="com.example.mchat.UserActivity"
-44-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:28:13-41
-45            android:parentActivityName="com.example.mchat.MainActivity" >
-45-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:29:13-55
-46        </activity>
-47        <activity
-47-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:31:9-34:20
-48            android:name="com.example.mchat.ConversationActivity"
-48-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:32:13-49
-49            android:parentActivityName="com.example.mchat.UserActivity" >
-49-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:33:13-55
+31        android:theme="@style/Theme.MChat" >
+31-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:16:9-43
+32        <activity
+32-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:18:9-26:20
+33            android:name="com.example.mchat.MainActivity"
+33-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:19:13-41
+34            android:exported="true"
+34-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:20:13-36
+35            android:label="MChat" >
+35-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:21:13-34
+36            <intent-filter>
+36-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:22:13-25:29
+37                <action android:name="android.intent.action.MAIN" />
+37-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:23:17-69
+37-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:23:25-66
+38
+39                <category android:name="android.intent.category.LAUNCHER" />
+39-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:24:17-77
+39-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:24:27-74
+40            </intent-filter>
+41        </activity>
+42        <activity
+42-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:27:9-30:20
+43            android:name="com.example.mchat.UserActivity"
+43-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:28:13-41
+44            android:parentActivityName="com.example.mchat.MainActivity" >
+44-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:29:13-55
+45        </activity>
+46        <activity
+46-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:31:9-35:20
+47            android:name="com.example.mchat.ConversationActivity"
+47-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:32:13-49
+48            android:parentActivityName="com.example.mchat.UserActivity"
+48-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:34:13-55
+49            android:windowSoftInputMode="adjustPan" >
+49-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:33:13-52
 50        </activity>
 51        <activity
-51-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:35:9-38:20
+51-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:36:9-39:20
 52            android:name="com.example.mchat.RegistrationActivity"
-52-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:36:13-49
+52-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:37:13-49
 53            android:parentActivityName="com.example.mchat.MainActivity" >
-53-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:37:13-55
+53-->C:\Users\mimag\AndroidStudioProjects\MChat\app\src\main\AndroidManifest.xml:38:13-55
 54        </activity>
 55
 56        <service

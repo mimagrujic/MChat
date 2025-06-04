@@ -30,6 +30,7 @@
         </activity>
         <activity
             android:name=".ConversationActivity"
+            android:windowSoftInputMode="adjustPan"
             android:parentActivityName=".UserActivity">
         </activity>
         <activity

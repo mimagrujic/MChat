@@ -3,6 +3,7 @@ package com.example.mchat;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -107,7 +108,11 @@ public class ConversationActivity extends AppCompatActivity {
                             || (message.getSender().equals(recipientUsername) && message.getReceiver().equals(senderUsername)))) {
                         try {
                             String decryptedMessage = CryptoManager.decrypt(
-                                    message.getIv() + ":" + message.getText());
+                                    message.getIv() +
+                                            ":" + message.getText() +
+                                            ":" + senderUsername +
+                                            ":" + recipientUsername +
+                                            ":" + message.getSalt());
                             message.setText(decryptedMessage);
                             messages.add(message);
                         } catch (Exception e) {
@@ -185,14 +190,12 @@ public class ConversationActivity extends AppCompatActivity {
 
     private void sendMessage(String msg) throws Exception {
         String messageId = chatRef.push().getKey();
-        String encryptedData = CryptoManager.encrypt(msg);
+        String encryptedData = CryptoManager.encrypt(msg, senderUsername, recipientUsername);
         String[] encryptedParts = encryptedData.split(":");
-        if (encryptedParts.length != 2) {
-            return;
-        }
         String iv = encryptedParts[0];
         String text = encryptedParts[1];
         Message message = new Message(messageId, senderUsername, recipientUsername, text, iv, System.currentTimeMillis());
+        message.setSalt(encryptedParts[4]);
         if(messageId != null)
             chatRef.child(messageId).setValue(message);
     }
