@@ -32,7 +32,7 @@ MChat is a real-time messaging application for Android, built entirely in **Java
 - **Java**
 - **Android Studio**
 - **Firebase Realtime Database**
-- **AES-CBC encryption with HMAC**
+- **AES-CBC encryption**
 - **scrypt password hashing**
 - **RecyclerView** for chat display
 
