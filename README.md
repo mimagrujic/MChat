@@ -19,7 +19,6 @@ MChat is a real-time messaging application for Android, built entirely in **Java
 - 🔒 **Message Encryption**
   - Messages are encrypted using **AES-CBC** with a manually generated secret key
   - Encrypted data stored securely in Firebase
-  - HMAC used for integrity verification
 
 - ☁️ **Firebase Integration**
   - Firebase Realtime Database used for storing user data and messages
@@ -33,8 +32,14 @@ MChat is a real-time messaging application for Android, built entirely in **Java
 - **Android Studio**
 - **Firebase Realtime Database**
 - **AES-CBC encryption**
-- **scrypt password hashing**
+- **Scrypt password hashing**
 - **RecyclerView** for chat display
+
+---
+
+## 📷 Screenshots
+
+<img src="images/chatUI.jpg" alt="Chat UI" width="300"/>
 
 ---
 
